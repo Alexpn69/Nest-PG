@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserModule } from './user/user.module';
@@ -13,10 +11,14 @@ import { Log } from './logger/model/log.model';
     ConfigModule.forRoot({ envFilePath: `.${process.env.NODE_ENV}.env` }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
+      //host: 'db',
       host: process.env.POSTGRES_HOST,
       port: 5432,
+      //username: 'postgres',
       username: process.env.POSTGRES_USER,
+      // password: 'postgres',
       password: process.env.POSTGRES_PASSWORD,
+      //   database: 'postgres',
       database: process.env.POSTGRES_DB,
       models: [User, Log],
       autoLoadModels: true,
